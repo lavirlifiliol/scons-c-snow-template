@@ -19,3 +19,4 @@ prod_binary = env.Program(
 env.AddPostAction(test_binary, 'valgrind $VGFLAGS ./build/test')  
 env.AlwaysBuild(test_binary)
 env.Depends(prod_binary, test_binary)
+env.Command('../out/'+str(prod_binary[0]), prod_binary, 'cp $SOURCE $TARGET',)
