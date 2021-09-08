@@ -1,3 +1,4 @@
 *.dblite
 build/
 out/
+.actrc
