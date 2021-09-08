@@ -1,19 +1,20 @@
 #include <stdio.h>
+
 int sum(int a, int b) {
     return a + b;
 }
 
 
-#ifdef SNOW_ENABLED
-snow_main();
-#else
+#ifndef SNOW_ENABLED
 int main() {
-    printf("4 + 5 = %d", sum(4, 5));
+    printf("4 + 5 = %d\n", sum(4, 5));
 }
-#endif
-#include <snow.h>
+#else
+#include "snow.h"
 describe(sum) {
-    it(sums) {
+    it("sums") {
         asserteq(9, sum(4, 5));
     }
 }
+snow_main();
+#endif

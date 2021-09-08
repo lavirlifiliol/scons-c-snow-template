@@ -1,8 +1,0 @@
-env = Environment()
-test_binary = env.Program(
-    env.Glob('*.c'),
-    CFLAGS=[ '-fsanitize=undefined', '-DSNOW_ENABLED', 
-'-Og', '-g', '-Wall', '-Wextra', '-Wpedantic', '-Werror'],
-    CCPATH=['.', '../include'],
-    LINKFLAGS=['-fsanitize=undefined'],
-)
