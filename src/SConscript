@@ -1,5 +1,5 @@
 env = Environment(
-    CFLAGS=['-Wall', '-Wextra', '-Wpedantic', '-Werror'],
+    CPPFLAGS=['-Wall', '-Wextra', '-Wpedantic', '-Werror'],
     CPPPATH=['.', '../include'],
     VGFLAGS=['--quiet','--leak-check=full','--show-leak-kinds=all','--track-origins=yes','--error-exitcode=1'],
 )
