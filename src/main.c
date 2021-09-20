@@ -7,7 +7,9 @@ int sum(int a, int b) {
 
 #ifndef SNOW_ENABLED
 int main() {
-    printf("4 + 5 = %d\n", sum(4, 5));
+    int a, b;
+    scanf("%i %i", &a, &b);
+    printf("%d\n", sum(a, b));
 }
 #else
 #include "snow.h"
