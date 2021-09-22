@@ -25,26 +25,26 @@ env = Environment(
     CPPPATH=['.', '../include'],
     VGFLAGS=['--quiet','--leak-check=full','--show-leak-kinds=all','--track-origins=yes','--error-exitcode=1'],
 )
-test_binary = env.Program(
+test_env = env.Clone(LINKFLAGS='-fsanitize=undefined')
+test_env.Append(
+    CCFLAGS=['-fsanitize=undefined', '-O0', '-g',],
+)
+test_binary = test_env.Program(
     'test',
     env.Glob('*.c'),
-    CCFLAGS=[ '-fsanitize=undefined', '-O0', '-g',],
     CPPFLAGS=['-DSNOW_ENABLED', ],
-    LINKFLAGS=['-fsanitize=undefined'],
     OBJPREFIX='test-',
 )
 
-integration_binary = env.Program(
+integration_binary = test_env.Program(
     'itest',
     env.Glob('*.c'),
-    CCFLAGS=[ '-fsanitize=undefined', '-O0', '-g',],
-    LINKFLAGS=['-fsanitize=undefined'],
     OBJPREFIX='itest-',
 )
 
 prod_binary = env.Program(
     env.Glob('*.c'),
-    CCFLAGS=['-O2'],
+    CCFLAGS=env['CCFLAGS'] + ['-O2'],
 )
 
 env.Alias('test', integration_binary)
